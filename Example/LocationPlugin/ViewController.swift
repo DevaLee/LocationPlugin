@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocationPlugin
 
 class ViewController: UIViewController {
 
@@ -18,6 +19,26 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        LocationManager.default.requestLocation().responseResult { (locationResponse) in
+            if let error = locationResponse.error {
+                print("定位信息获取失败: \(error)")
+            }else {
+                print(locationResponse.coordinate!)
+            }
+        }
+        
+        LocationManager.default.requestLocation().didUpdateResult { (response) in
+            if let error = response.error {
+                print("定位信息获取失败:\(error)")
+            }else {
+                print(response.coordinate!)
+            }
+        }
+        
+       
     }
 
 }

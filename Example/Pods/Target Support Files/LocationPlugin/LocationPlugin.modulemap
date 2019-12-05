@@ -1,0 +1,6 @@
+framework module LocationPlugin {
+  umbrella header "LocationPlugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
